@@ -17,6 +17,8 @@ from bpython import args as bpargs
 from bpython.translations import _
 from bpython.importcompletion import find_iterator
 
+import hy.cmdline
+
 repl = None # global for `from bpython.curtsies import repl`
 #WARNING Will be a problem if more than one repl is ever instantiated this way
 
@@ -39,7 +41,7 @@ def main(args=None, locals_=None, banner=None):
     else:
         logging.getLogger('bpython').setLevel(logging.WARNING)
 
-    interp = None
+    interp = hy.cmdline.HyREPL()
     paste = None
     if exec_args:
         assert options, "don't pass in exec_args without options"
