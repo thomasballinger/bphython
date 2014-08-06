@@ -1,11 +1,12 @@
 
+hg+https://bitbucket.org/birkenfeld/pygments-main
+
 git+git://github.com/bpython/bpython.git@innocuous-changes-for-monkeypatching
 
 # latest master curtsies as of August 6, 2014
 git+git://github.com/thomasballinger/curtsies.git@8457f121a29b7c71741e0b8c64e2076b3ac87657
 
 #bpython requirements
-pygments
 greenlet
 
 # curtsies requirements

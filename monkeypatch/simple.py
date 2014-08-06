@@ -2,6 +2,12 @@ import hy.cmdline
 import hy.lex
 
 # commence the monkey patching!
+
+from pygments.lexers import get_lexer_by_name
+hy_lexer = lambda: get_lexer_by_name('hylang')
+import bpython._py3compat
+bpython._py3compat.PythonLexer = hy_lexer
+
 import bpython.repl
 bpython.repl.Repl.ps1 = property(lambda self: '=> ')
 
@@ -40,3 +46,4 @@ def buffer_finished_will_parse(self):
         code_will_parse = True
     return finished, code_will_parse
 bpython.curtsiesfrontend.repl.Repl.buffer_finished_will_parse = buffer_finished_will_parse
+
