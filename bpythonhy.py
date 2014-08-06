@@ -23,6 +23,21 @@ import hy.cmdline
 import bpython.repl
 bpython.repl.Repl.ps1 = property(lambda self: '=> ')
 
+import shlex, tempfile, subprocess
+def send_to_external_editor(self, text, filename=None):
+    """Returns modified text from an editor, or the oriignal text if editor exited with non-zero"""
+    editor_args = shlex.split(self.config.editor)
+    with tempfile.NamedTemporaryFile(suffix='.hy') as temp:
+        temp.write(text)
+        temp.flush()
+        if subprocess.call(editor_args + [temp.name]) == 0:
+            with open(temp.name) as f:
+                return f.read()
+        else:
+            return text
+bpython.repl.Repl.send_to_external_editor = send_to_external_editor
+
+
 repl = None # global for `from bpython.curtsies import repl`
 #WARNING Will be a problem if more than one repl is ever instantiated this way
 
