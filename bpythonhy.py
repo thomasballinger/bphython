@@ -19,6 +19,10 @@ from bpython.importcompletion import find_iterator
 
 import hy.cmdline
 
+# commence the monkey patching!
+import bpython.repl
+bpython.repl.Repl.ps1 = property(lambda self: '=> ')
+
 repl = None # global for `from bpython.curtsies import repl`
 #WARNING Will be a problem if more than one repl is ever instantiated this way
 
